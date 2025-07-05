@@ -209,7 +209,7 @@ const Home = () => {
           Add More
         </Button>
         <Button variant="contained" onClick={handleShorten} color="primary">
-          Shorten All
+          Shorten URL
         </Button>
       </Box>
 

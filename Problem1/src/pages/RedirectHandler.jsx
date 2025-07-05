@@ -12,7 +12,7 @@ import { log } from "../utils/loggerMiddleware";
 const RedirectHandler = () => {
   const { shortcode } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState("loading"); // 'loading', 'error', 'expired'
+  const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -40,14 +40,12 @@ const RedirectHandler = () => {
       return;
     }
 
-    // Prepare click log
     const clickLog = {
       timestamp: now.toISOString(),
       referrer: document.referrer || "Direct",
       location: "Unknown",
     };
 
-    // Fetch coarse location using a free IP geolocation API (optional)
     fetch("https://ipapi.co/json/")
       .then((res) => res.json())
       .then((data) => {
@@ -57,7 +55,6 @@ const RedirectHandler = () => {
         log("Failed to fetch location", "warn");
       })
       .finally(() => {
-        // Update clicks array
         shortenedUrls[entryIndex].clicks.push(clickLog);
         localStorage.setItem("shortenedUrls", JSON.stringify(shortenedUrls));
 
